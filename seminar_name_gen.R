@@ -51,7 +51,9 @@ ui <- fluidPage(
         br(),
         br(),
         br(),
-        p('Criado por: João Pedro Oliveira [@kimjoaoun]')
+        p('Criado por: João Pedro Oliveira [@kimjoaoun]'),
+        br()
+        p('Esse Aplicativo não tem o intuito de ofender nenhum funcionario ou a instituição qual acima se é referida, caso alguém se sinta ofendido, por favor, contatar o desenvolvedor pelo e-mail: joaopedro3d@me.com')
         
       )
    )
