@@ -16,24 +16,17 @@ ui <- fluidPage(
       
       # Show a plot of the generated distribution
       mainPanel(
-        em('O Instituto de Relações Internacionais realiza semestralmente dezenas de eventos acadêmicos, 
+        em('O Instituto de Relações Internacionais (IRI/PUC-Rio) realiza semestralmente dezenas de eventos acadêmicos, 
           que em sua maioria são muito interessantes, porém, é possível perceber que eles são nomeados de acordo com um determinado padrão.'),
-        
         br(),
-        
         em('Com o intuito de diminuir o esforço dos responsáveis por idealizar estes nomes, este App gera aleatoriamente, 
           a partir de um pool de palavras já utilizadas em eventos do IRI, nomes (que fazem sentido) para que possam ser utilizados 
           em eventos futuros.'),
-        
+        em("No momento, são possíveis '29106' diferentes combinações de nomes"),
         br(),
         br(),
         strong('O nome do evento é: '),
-         textOutput("text"),
-        br(),
-        br(),
-        br(),
-        br(),
-        br(),
+        textOutput("text"),
         br(),
         br(),
         br(),
@@ -52,8 +45,9 @@ ui <- fluidPage(
         br(),
         br(),
         p('Criado por: João Pedro Oliveira [@kimjoaoun]'),
-        br()
-        p('Esse Aplicativo não tem o intuito de ofender nenhum funcionario ou a instituição qual acima se é referida, caso alguém se sinta ofendido, por favor, contatar o desenvolvedor pelo e-mail: joaopedro3d@me.com')
+        br(),
+        p('Esta aplicação não tem o objetivo de ofender nenhum funcionário ou instituição qual acima se é referida.'),
+        p('Em caso de algum contratempo, por favor, contatar o desenvolvedor: joaopedro3d@me.com')
         
       )
    )
@@ -91,7 +85,9 @@ server <- function(input, output) {
                    'Desafios ',
                    'Transformações ',
                    'As Experiências ',
-                   'Epistemologias ')
+                   'Epistemologias ',
+                   'Cooperações ',
+                   'Geografias ')
         
         lista2 = c('Descoloniais ',
                    'Decoloniais ',
@@ -111,7 +107,9 @@ server <- function(input, output) {
                    'sobre a Projeção Chinesa ',
                    'na Rio+20 ',
                    'dos Nacionalismos ',
-                   'sobre a fragilidade do MERCOSUL ')
+                   'sobre a fragilidade do MERCOSUL ',
+                   'das Relações Internacionais '
+                   )
         
         lista4 = c('em Tempos de Crise', 
                    'pós-BREXIT', 
@@ -125,7 +123,8 @@ server <- function(input, output) {
                    'e Direitos Humanos no Brasil',
                    ': Uma Visão de Teoria como Prática Cotidiana',
                    ': Uma Perspectiva Contemporânea',
-                   ': Um Cenário Pós-colonial')
+                   ': Um Cenário Pós-colonial',
+                   'em Perspectiva Global')
 ######
   
       ntext <- eventReactive(input$butger, {
