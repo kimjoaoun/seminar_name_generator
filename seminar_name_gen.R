@@ -23,7 +23,7 @@ ui <- fluidPage(
           a partir de um pool de palavras já utilizadas em eventos do IRI, nomes (que fazem sentido) para que possam ser utilizados 
           em eventos futuros.'),
         br(),
-        em("No momento, são possíveis '29106' diferentes combinações de nomes"),
+        em("No momento, são possíveis '62370' diferentes combinações de nomes"),
         br(),
         br(),
         strong('O nome do evento é: '),
@@ -66,7 +66,8 @@ server <- function(input, output) {
                 FALSE,
                 FALSE)
         
-        lista0 = c('Debate de Conjuntura: ')
+        lista0 = c('Debate de Conjuntura: ',
+                   '(Des)construindo')
         
         lista1 = c('Olhares ',
                    'Visões ', 
@@ -125,7 +126,8 @@ server <- function(input, output) {
                    ': Uma Visão de Teoria como Prática Cotidiana',
                    ': Uma Perspectiva Contemporânea',
                    ': Um Cenário Pós-colonial',
-                   'em Perspectiva Global')
+                   'em Perspectiva Global',
+                   'e Resolução de Conflitos')
 ######
   
       ntext <- eventReactive(input$butger, {
