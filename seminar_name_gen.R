@@ -8,22 +8,20 @@ ui <- fluidPage(
    titlePanel("Gerador de Nomes para Eventos do IRI"),
    
    # Sidebar with a slider input for number of bins 
-   sidebarLayout(
-      sidebarPanel("Aperte o Botão:  ",
-        
-        actionButton('butger', 'Gerar')
-      ),
-      
+
       # Show a plot of the generated distribution
-      mainPanel(
-        em('O Instituto de Relações Internacionais (IRI/PUC-Rio) realiza semestralmente dezenas de eventos acadêmicos, 
-          que em sua maioria são muito interessantes, porém, é possível perceber que eles são nomeados de acordo com um determinado padrão.'),
+      navlistPanel(
+      tabPanel('Inicio',
         br(),
-        em('Com o intuito de diminuir o esforço dos responsáveis por idealizar estes nomes, este App gera aleatoriamente, 
+        p('O Instituto de Relações Internacionais (IRI/PUC-Rio) realiza semestralmente dezenas de eventos acadêmicos, 
+          que em sua maioria são muito interessantes, porém, é possível perceber que eles são nomeados de acordo com um determinado padrão.'),
+        p('Com o intuito de diminuir o esforço dos responsáveis por idealizar estes nomes, este App gera aleatoriamente, 
           a partir de um pool de palavras já utilizadas em eventos do IRI, nomes (que fazem sentido) para que possam ser utilizados 
           em eventos futuros.'),
         br(),
-        em("No momento, são possíveis '62370' diferentes combinações de nomes"),
+        p('Aperte no botão abaixo para gerar o nome de um evento:'),
+        br(),
+        actionButton('butger', 'Gerar!'),
         br(),
         br(),
         strong('O nome do evento é: '),
@@ -33,26 +31,19 @@ ui <- fluidPage(
         br(),
         br(),
         br(),
-        br(),
-        br(),
-        br(),
-        br(),
-        br(),
-        br(),
-        br(),
-        br(),
-        br(),
-        br(),
-        br(),
-        br(),
-        p('Criado por: João Pedro Oliveira [@kimjoaoun]'),
-        br(),
-        p('Esta aplicação não tem o objetivo de ofender nenhum funcionário ou instituição qual acima se é referida.'),
-        p('Em caso de algum contratempo, por favor, contatar o desenvolvedor: joaopedro3d@me.com')
-        
+        br()
+      ),
+      tabPanel('Sobre',
+               em("No momento, são possíveis '66528' diferentes combinações de nomes"),
+               br(),
+               p('Este ShinyApp foi criado por: João Pedro Oliveira [@kimjoaoun]'),
+               br(),
+               p('Esta aplicação não tem o objetivo de ofender nenhum funcionário ou instituição qual acima se é referida. 
+                 Em caso de algum contratempo, por favor, contatar o desenvolvedor: joaopedro3d@me.com')
+               
+      )
       )
    )
-)
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
@@ -67,7 +58,7 @@ server <- function(input, output) {
                 FALSE)
         
         lista0 = c('Debate de Conjuntura: ',
-                   '(Des)construindo')
+                   '(Des)construindo ')
         
         lista1 = c('Olhares ',
                    'Visões ', 
@@ -127,11 +118,13 @@ server <- function(input, output) {
                    ': Uma Perspectiva Contemporânea',
                    ': Um Cenário Pós-colonial',
                    'em Perspectiva Global',
-                   'e Resolução de Conflitos')
+                   'e Resolução de Conflitos',
+                   'sob o Olhar Feminino')
 ######
   
       ntext <- eventReactive(input$butger, {
         zerocond = sample(dbc, 1)
+        zero = sample(lista0, 1)
         first = sample(lista1, 1)
         sec = sample(lista2, 1)
         third = sample(lista3, 1)
@@ -140,7 +133,7 @@ server <- function(input, output) {
         if(zerocond == FALSE){
           str.result = stringr::str_c(first, sec, third, fourth)
         } else {
-          str.result = stringr::str_c(lista0, first, sec, third, fourth)
+          str.result = stringr::str_c(zero, first, sec, third, fourth)
         }
         
         str.result
