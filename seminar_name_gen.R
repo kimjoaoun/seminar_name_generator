@@ -1,17 +1,16 @@
 library(shiny)
 library(stringr)
 
-# Define UI for application that draws a histogram
+# Define a User Interface
 ui <- fluidPage(
    
-   # Application title
+   # Titulo
    titlePanel("Gerador de Nomes para Eventos do IRI"),
    
-   # Sidebar with a slider input for number of bins 
-
-      # Show a plot of the generated distribution
+      # Cria uma navlist (menu) lateral.
       navlistPanel(
-      tabPanel('Inicio',
+      #inicio dos dados que estarão no primeiro item do menu, denominado: inicio.
+         tabPanel('Inicio',
         br(),
         p('O Instituto de Relações Internacionais (IRI/PUC-Rio) realiza semestralmente dezenas de eventos acadêmicos, 
           que em sua maioria são muito interessantes, porém, é possível perceber que eles são nomeados de acordo com um determinado padrão.'),
@@ -21,11 +20,11 @@ ui <- fluidPage(
         br(),
         p('Aperte no botão abaixo para gerar o nome de um evento:'),
         br(),
-        actionButton('butger', 'Gerar!'),
+        actionButton('butger', 'Gerar!'), #Cria o botão responsável por rodar a função.
         br(),
         br(),
         strong('O nome do evento é: '),
-        textOutput("text"),
+        textOutput("text"), #Texto que é retornado como resultado da funço.
         br(),
         br(),
         br(),
@@ -33,6 +32,7 @@ ui <- fluidPage(
         br(),
         br()
       ),
+         #Informaçoes que estarao no segundo painel do menu, denominado: sobre
       tabPanel('Sobre',
                em("No momento, são possíveis '66528' diferentes combinações de nomes"),
                br(),
@@ -49,6 +49,7 @@ ui <- fluidPage(
 server <- function(input, output) {
 
   ######
+   #[1]
         dbc = c(TRUE, 
                 FALSE,
                 FALSE,
@@ -56,9 +57,9 @@ server <- function(input, output) {
                 FALSE,
                 FALSE,
                 FALSE)
-        
+        #[1]
         lista0 = c('Debate de Conjuntura: ',
-                   '(Des)construindo ')
+                   '(Des)construindo ') #BLoco 0: Nem sempre estara presente, só 1/6 de chance de aparecer.
         
         lista1 = c('Olhares ',
                    'Visões ', 
@@ -80,7 +81,7 @@ server <- function(input, output) {
                    'As Experiências ',
                    'Epistemologias ',
                    'Cooperações ',
-                   'Geografias ')
+                   'Geografias ') #Bloco 1.
         
         lista2 = c('Descoloniais ',
                    'Decoloniais ',
@@ -92,7 +93,7 @@ server <- function(input, output) {
                    'de Mulheres ',
                    'do Neoliberalismo ',
                    'Africanas '
-                   )
+                   ) #Bloco 2.
         
         lista3 = c('sobre o BRICS ',
                    'da Política Externa Americana ', 
@@ -102,7 +103,7 @@ server <- function(input, output) {
                    'dos Nacionalismos ',
                    'sobre a fragilidade do MERCOSUL ',
                    'das Relações Internacionais '
-                   )
+                   ) #Bloco 3
         
         lista4 = c('em Tempos de Crise', 
                    'pós-BREXIT', 
@@ -119,24 +120,26 @@ server <- function(input, output) {
                    ': Um Cenário Pós-colonial',
                    'em Perspectiva Global',
                    'e Resolução de Conflitos',
-                   'sob o Olhar Feminino')
+                   'sob o Olhar Feminino') #Bloco 4 (e final).
 ######
   
-      ntext <- eventReactive(input$butger, {
-        zerocond = sample(dbc, 1)
-        zero = sample(lista0, 1)
-        first = sample(lista1, 1)
-        sec = sample(lista2, 1)
-        third = sample(lista3, 1)
-        fourth = sample(lista4, 1)
+      ntext <- eventReactive(input$butger, { #Função executada após o botao ser apertado
+         
+        zerocond = sample(dbc, 1) #[1] Escolhe entre TRUE ou FALSE (1/6 de chance de ser TRUE).
+        zero = sample(lista0, 1) #Caso zerocond == TRUE, sortear uma string da lista0.
+        first = sample(lista1, 1) #Sorteia uma string da lista1
+        sec = sample(lista2, 1) #Sorteia uma string da lista2
+        third = sample(lista3, 1) #Sorteia uma string da lista3
+        fourth = sample(lista4, 1) #Sorteia uma string da lista4
         
         if(zerocond == FALSE){
-          str.result = stringr::str_c(first, sec, third, fourth)
+          str.result = stringr::str_c(first, sec, third, fourth) #str_c concatena as strings sorteadas em uma só string.
         } else {
-          str.result = stringr::str_c(zero, first, sec, third, fourth)
+          str.result = stringr::str_c(zero, first, sec, third, fourth) #Caso a zerocond seja verdadeiro, adicionar na string o que fora
+          #sorteado para continuar a frase.
         }
         
-        str.result
+        str.result #String resultante do processo.
         }
         
       )
